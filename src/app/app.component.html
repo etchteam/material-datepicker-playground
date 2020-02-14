@@ -1,0 +1,83 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <h1>
+    Material Datepicker
+  </h1>
+
+  <section>
+    <h2>Default</h2>
+    <input [matDatepicker]="defaultPicker" />
+    <mat-datepicker-toggle [for]="defaultPicker"></mat-datepicker-toggle>
+    <mat-datepicker #defaultPicker></mat-datepicker>
+  </section>
+
+  <section>
+    <h2>Select month start view with 30-day range</h2>
+    <input matInput [min]="limitedMonthPickerRange.min" [max]="limitedMonthPickerRange.max" [matDatepicker]="limitedMonthPicker">
+    <mat-datepicker-toggle matSuffix [for]="limitedMonthPicker"></mat-datepicker-toggle>
+    <mat-datepicker #limitedMonthPicker startView="year" [startAt]="02/20/2020"></mat-datepicker>
+  </section>
+
+  <section>
+    <h2>Select year start view with 364-day range</h2>
+    <input matInput [min]="limitedYearPickerRange.min" [max]="limitedYearPickerRange.max" [matDatepicker]="limitedYearPicker">
+    <mat-datepicker-toggle matSuffix [for]="limitedYearPicker"></mat-datepicker-toggle>
+    <mat-datepicker #limitedYearPicker startView="multi-year" [startAt]="02/20/2020"></mat-datepicker>
+  </section>
+
+  <section>
+    <h2>Always open</h2>
+    <p>
+      The always open `mat-datepicker` works as a modal which isn't what we want.<br/>
+      This example resorts to using an undocumented `mat-calendar` component instead.<br/>
+      `mat-calendar` is the component datepicker uses, just not in a modal and not tied to an input.<br/>
+      Available props can be found in the
+      <a href="https://github.com/angular/components/blob/master/src/material/datepicker/calendar.ts#L183" target="_blank" rel="noopener noreferrer">source code</a>.<br/>
+      It handles navigation but select events need to be manually handled.
+    </p>
+    <div style="display:flex;">
+      <div>
+        <strong>Day view</strong>
+        <div style="width:300px;border:1px solid;">
+          <mat-calendar
+            [minDate]="limitedMonthPickerRange.min"
+            [maxDate]="limitedMonthPickerRange.max"
+            [selected]="limitedMonthPickerRange.min"
+          ></mat-calendar>
+        </div>
+      </div>
+      <div style="margin-left:1em;">
+        <strong>Month view</strong>
+        <div style="width:300px;border:1px solid;">
+          <mat-calendar
+            startView="year"
+            [minDate]="limitedMonthPickerRange.min"
+            [maxDate]="limitedMonthPickerRange.max"
+            [selected]="limitedMonthPickerRange.min"
+          ></mat-calendar>
+        </div>
+      </div>
+      <div style="margin-left:1em;">
+        <strong>Year view</strong>
+        <div style="width:300px;border:1px solid;">
+          <mat-calendar
+            startView="multi-year"
+            [minDate]="limitedYearPickerRange.min"
+            [maxDate]="limitedYearPickerRange.max"
+            [selected]="limitedYearPickerRange.min"
+          ></mat-calendar>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Trigger open + Touch UI mode</h2>
+    <button (click)="touchPicker.open()">Open</button>
+    <div style="display:none;">
+      <input matInput [min]="limitedMonthPickerRange.min" [max]="limitedMonthPickerRange.max" [matDatepicker]="touchPicker">
+      <mat-datepicker-toggle matSuffix [for]="touchPicker"></mat-datepicker-toggle>
+    </div>
+    <mat-datepicker touchUi #touchPicker startView="year" [startAt]="02/20/2020"></mat-datepicker>
+  </section>
+</div>
